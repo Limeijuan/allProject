@@ -1,0 +1,25 @@
+{
+  "name": "webpack_dev",
+  "version": "1.0.0",
+  "description": "",
+  "main": "\u001b[B\u001b[C\u001b[C",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Limeijuan/boxuegu.git"
+  },
+  "author": "longmo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Limeijuan/boxuegu/issues"
+  },
+  "homepage": "https://github.com/Limeijuan/boxuegu#readme",
+  "devDependencies": {
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
+  },
+  "dependencies": {}
+}
