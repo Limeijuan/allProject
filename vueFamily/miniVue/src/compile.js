@@ -51,12 +51,7 @@ class Compile{
     }
     // 解析文本节点
     compileText(node) {
-        let text = node.textContent;
-        let reg = /\{\{(.+)\}\}/
-        if(reg.test(text)) {
-            let expr = RegExp.$1;
-            node.textContent = text.replace(reg, this.vm.$data[expr])
-        }
+        CompileUtil.mustache(node, this.vm)
     }
     // 解析元素节点
     compileElement(node) {
@@ -100,19 +95,27 @@ class Compile{
 }
 
 let CompileUtil = {
+    mustache(node, vm) {
+        let text = node.textContent;
+        let reg = /\{\{(.+)\}\}/
+        if(reg.test(text)) {
+            let expr = RegExp.$1;
+            node.textContent = text.replace(reg, CompileUtil.getVMValue(vm, expr))
+        }
+    },
     // 处理v-text指令
     text(node, vm, expr) {
-        node.textContent = vm.$data[expr];
+        node.textContent = this.getVMValue(vm, expr);
     },
     
     // 处理v-html指令
     html(node, vm, expr) {
-        node.innerHTML = vm.$data[expr];
+        node.innerHTML = this.getVMValue(vm, expr);;
     },
     
     // 处理v-model指令
     model(node, vm, expr) {
-        node.value = vm.$data[expr];
+        node.value = this.getVMValue(vm, expr);;
     },
 
     // 处理事件方法 v-on
@@ -125,6 +128,17 @@ let CompileUtil = {
             node.addEventListener(eventType, fn.bind(vm))
         }
         
+    },
+
+    // 获取vm中的数据
+    getVMValue(vm, expr) {
+        let data = vm.$data;
+        expr.split(".").forEach(item => {
+            data = data[item];
+        });
+        return data
     }
+    
+
     
 }

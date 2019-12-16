@@ -13,11 +13,13 @@
         <p v-text="msg"></p>
         <p v-html="tag"></p>
         <div>
-            zizihah{{mag}}
+            zizihah{{msg}}
             <p>{{msg}}</p>
         </div>
         <input type="text" v-model="msg">
         <button v-on:click="clickFn">按钮</button>
+        <p>car名字：{{car.name}}</p>
+        <p>car颜色: <span v-text='car.color'></span></p>
     </div>
 </body>
 <script src="src/minivue.js"></script>
@@ -27,7 +29,11 @@
         el: '#app',
         data: {
             msg: 'v-tttext hello world',
-            tag: '<h1> v-html哈哈哈哈哈</h1>'
+            tag: '<h1> v-html哈哈哈哈哈</h1>',
+            car: {
+                name: "大众",
+                color: "red"
+            }
         },
         methods: {
             clickFn() {
@@ -35,5 +41,6 @@
             }
         }
     })
+    
 </script>
 </html>
